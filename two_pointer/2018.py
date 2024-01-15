@@ -47,4 +47,4 @@ while p1 < n//2 + 1 and p2 <= n:
     if sum_val == n: 
         cnt += 1
 
-print(cnt + 1)
+print(cnt+1)
