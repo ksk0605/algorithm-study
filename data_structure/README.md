@@ -35,14 +35,10 @@ def heappush(heap, data):
     while current > 0:
         # 추가한 원소의 부모 인덱스를 구한다.
         parent = (current - 1) // 2
-        if abs(heap[parent]) > abs(heap[current]):
+        if heap[parent] > heap[current]:
             heap[parent], heap[current] = heap[current], heap[parent]
             # 추가한 원소의 인덱스를 갱신한다.
             current = parent
-        elif abs(heap[parent]) == abs(heap[current]) and heap[parent] > heap[current]:
-            heap[parent], heap[current] = heap[current], heap[parent]
-            # 추가한 원소의 인덱스를 갱신한다.
-            current = parent   
         else:
             break
 
