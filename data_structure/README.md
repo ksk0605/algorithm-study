@@ -24,3 +24,28 @@
 위와는 다른 대표적인 비선형구조의 알고리즘으로 주로 우선순위 큐를 구현하는 데 사용된다. 완전 이진 트리(Complete Binary Tree)의 형태를 가지며, 부모 노드의 값이 항상 자식 노드의 값보다 작은지(또는 큰지)를 보장하는 속성을 갖는다는게 특징. 이때, 부모 노드의 값이 항상 자식 노드의 값보다 작은 경우를 '최소 힙(Min Heap)'이라 하고, 부모 노드의 값이 항상 자식 노드의 값보다 큰 경우를 '최대 힙(Max Heap)'이라고 한다.
 
 삽입 삭제 모두 힙의 높이에 의해 결정되며 O(logN)이 걸린다는 것이 특징이다. 삽입 삭제 모두 상수시간이 걸리는 위 알고리즘들보다는 느리지만 사용목적 자체가 __최대/최소 값을 빠르게 찾는다__ 는데 있다. 
+
+
+``` py
+def heappush(heap, data):
+    heap.append(data)
+    # 추가한 원소의 인덱스를 구한다.
+    current = len(heap) - 1
+    # 현재 원소가 루트(인덱스 0)에 도달하면 종료
+    while current > 0:
+        # 추가한 원소의 부모 인덱스를 구한다.
+        parent = (current - 1) // 2
+        if abs(heap[parent]) > abs(heap[current]):
+            heap[parent], heap[current] = heap[current], heap[parent]
+            # 추가한 원소의 인덱스를 갱신한다.
+            current = parent
+        elif abs(heap[parent]) == abs(heap[current]) and heap[parent] > heap[current]:
+            heap[parent], heap[current] = heap[current], heap[parent]
+            # 추가한 원소의 인덱스를 갱신한다.
+            current = parent   
+        else:
+            break
+
+```
+
+대부분의 언어(자바, CPP, 파이썬)에서 배열로 구현되어있다.
