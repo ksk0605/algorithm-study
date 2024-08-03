@@ -15,29 +15,33 @@ public class Main {
 
         int n = Integer.parseInt(bf.readLine());
 
-        Tuple[] plusTp = new Tuple[n];
-        Tuple[] minusTp = new Tuple[n];
+        Tuple[] tps = new Tuple[n];
 
         for (int i = 0; i < n; i++) {
             StringTokenizer st = new StringTokenizer(bf.readLine());
             Tuple tuple = new Tuple(Long.parseLong(st.nextToken()), Long.parseLong(st.nextToken()));
-            plusTp[i] = tuple;
+            tps[i] = tuple;
         }
 
-        Arrays.sort(plusTp);
+        Arrays.sort(tps);
         PriorityQueue<Long> pq = new PriorityQueue<>(Collections.reverseOrder());
 
-        long leng = plusTp[0].y - plusTp[0].x;
-        pq.add(plusTp[0].y);
+        for (int i = 0; i < n; i++) {
+            System.out.println(tps[i].x + " " + tps[i].y);
+        }
+        
+        long leng = tps[0].y - tps[0].x;
+        pq.add(tps[0].y);
 
         for (int i = 1; i < n; i++) {
-            Tuple curr = plusTp[i];
-            leng += curr.y - curr.x;
-            if (pq.peek() > curr.x) {
-                leng -= pq.peek() - curr.x;
+            Tuple curr = tps[i];
+            if (pq.peek() < curr.y) {
+                leng += curr.y - curr.x;
+                if (pq.peek() > curr.x) {
+                    leng -= pq.peek() - curr.x;
+                }
             }
             pq.add(curr.y);
-//            System.out.println(leng);
         }
 
         System.out.println(leng);
